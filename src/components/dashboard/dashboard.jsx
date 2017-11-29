@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-
+import Add from '../add/add';
 import Pane from '../pane/pane';
 
 class Dashboard extends Component {
@@ -8,8 +8,11 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      subreddits: ["aww", "news", "funny"]
+      subreddits: []
     };
+
+    this.addPane = this.addPane.bind(this);
+    this.renderPanes = this.renderPanes.bind(this);
   }
 
   componentDidMount() {
@@ -20,10 +23,17 @@ class Dashboard extends Component {
     return this.state.subreddits.map((sub, i) => <Pane subreddit={sub} key={i} />);
   }
 
+  addPane(sub) {
+    const subreddits = this.state.subreddits;
+    subreddits.push(sub);
+    this.setState({
+      subreddits
+    });
+  }
+
   render() {
-    
     return <div className="dashboard">
-        <h1>Dashboard</h1>
+        <Add add={this.addPane}/>
         {this.renderPanes()}
       </div>;
   }

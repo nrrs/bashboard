@@ -25,7 +25,7 @@ module.exports = {
   context: __dirname,
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "public", "assets", "javascripts"),
+    path: path.resolve(__dirname, "public", "assets", "javascript"),
     filename: "bundle.js"
   },
   plugins: plugins,

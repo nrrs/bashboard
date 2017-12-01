@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Axios from 'axios';
 
 class Pane extends Component {
   constructor(props) {
@@ -12,13 +11,11 @@ class Pane extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
-    Axios
-      .get(`https://www.reddit.com/r/${this.state.subName}.json`)
-      .then(res => console.log(res));
+    this.props.requestPosts(this.state.subName);
   }
 
   render() {
+    console.log('AHHHH', this.props);
     return (
       <div className="Pane">
         <h1>{this.state.subName}</h1>

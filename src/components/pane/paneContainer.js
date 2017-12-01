@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Pane from "./pane";
-// import { requestAllImages } from "../../actions/image_actions";
+import { requestPosts } from "../../reducers/postsReducer";
 
 // import {
 //   requestAllComments,
@@ -9,17 +9,18 @@ import Pane from "./pane";
 
 // import { selectAllObjects } from "../../reducers/selectors";
 
-const mapStateToProps = ({}) => {
-  // const mapStateToProps = (state) => {
+const mapStateToProps = ({ posts }, ownProps) => {
+  console.log(ownProps);
   return {
-    test: [1,2,3]
+    posts
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-//   requestAllComments: () => dispatch(requestAllComments()),
-//   requestAllImages: () => dispatch(requestAllImages()),
-//   requestCommentsForPost: post => dispatch(requestCommentsForPost(post))
+  requestPosts: sub => dispatch(requestPosts(sub)),
+  //   requestAllComments: () => dispatch(requestAllComments()),
+  //   requestAllImages: () => dispatch(requestAllImages()),
+  //   requestCommentsForPost: post => dispatch(requestCommentsForPost(post))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pane);

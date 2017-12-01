@@ -16,16 +16,23 @@ class Pane extends Component {
   }
 
   render() {
-    const postsById = Object.keys(this.props.posts);
-
     const posts = this.props.posts;
+    const postsIDs = Object.keys(posts);
 
-    return (
-      <div className="Pane">
+
+    return <div className="Pane">
         <h1>{this.state.subName}</h1>
-        <ul>{postsById.map(id => <li key={id}>{posts[id].data.title}</li>)}</ul>
-      </div>
-    );
+        <ul>
+          {postsIDs.map(id => {
+            return (
+              <li key={id}>
+                <strong>Title: </strong>{posts[id].data.title}<br/>
+                <strong>Score: </strong>{posts[id].data.score}
+              </li>
+            );
+          })}
+        </ul>
+      </div>;
   }
 }
 

@@ -1,24 +1,27 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
+import Axios from 'axios';
 
 class Pane extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        title: this.props.subreddit,
-        posts: {}
+      subName: this.props.subreddit,
+      posts: {}
     };
   }
 
   componentDidMount() {
     console.log(this.props);
+    Axios
+      .get(`https://www.reddit.com/r/${this.state.subName}.json`)
+      .then(res => console.log(res));
   }
 
   render() {
-      
     return (
       <div className="Pane">
-        <h1>{this.state.title}</h1>
+        <h1>{this.state.subName}</h1>
       </div>
     );
   }

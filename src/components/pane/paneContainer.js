@@ -10,7 +10,6 @@ import { requestPosts } from "../../reducers/postsReducer";
 // import { selectAllObjects } from "../../reducers/selectors";
 
 const mapStateToProps = ({ posts }, ownProps) => {
-  console.log(ownProps);
   return {
     posts
   };

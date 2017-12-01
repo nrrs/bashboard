@@ -21,7 +21,6 @@ class Dashboard extends Component {
   }
 
   addPane(sub) {
-    console.log('dashboard.addPane');
     const subreddits = this.state.subreddits;
     subreddits.push(sub);
     this.setState({
@@ -30,7 +29,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state);
     return <div className="dashboard">
         <Add add={this.addPane} />
         {this.renderPanes()}

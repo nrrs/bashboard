@@ -6,7 +6,7 @@ export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const receivePosts = posts => ({type: RECEIVE_POSTS, posts});
 
 export const requestPosts = (sub) => dispatch => {
-    return fetchPosts(sub).then(res => dispatch(receivePosts(res)));
+    return fetchPosts(sub).then(res => dispatch(receivePosts(res.data.data.children)));
 };
 
 // REDUCER
@@ -19,7 +19,6 @@ export const PostsReducer = (state = defaultState(), action) => {
 
     switch (action.type) {
         case RECEIVE_POSTS:
-            console.log('inside RECEIVE_POST of subsReducer');
             return Object.assign(copyState, action.posts);
         default:
             return copyState;

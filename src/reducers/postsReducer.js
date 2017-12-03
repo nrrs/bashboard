@@ -7,7 +7,6 @@ export const receivePosts = posts => ({type: RECEIVE_POSTS, posts});
 
 export const requestPosts = (sub) => dispatch => {
     return fetchPosts(sub).then(res => {
-        console.log(res.data.data.children);
         dispatch(receivePosts(res.data.data.children));
         } 
     );

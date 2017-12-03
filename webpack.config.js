@@ -2,7 +2,13 @@ var path = require("path");
 var webpack = require("webpack");
 
 var plugins = [];
-var devPlugins = [];
+var devPlugins = [
+  new webpack.DefinePlugin({
+    "process.env": {
+      NODE_ENV: JSON.stringify("development")
+    }
+  })
+];
 
 var prodPlugins = [
   new webpack.DefinePlugin({

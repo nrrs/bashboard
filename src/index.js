@@ -7,10 +7,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 registerServiceWorker();
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById("root");
     let store = configureStore();
+    console.log(process.env.NODE_ENV);
 
     ReactDOM.render(<App store={store} />, root);
 });

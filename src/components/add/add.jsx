@@ -1,4 +1,14 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
+
+const mapStateToProps = ({ subreddits }) => {
+  return {
+    dummy: 'dummy'
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+});
 
 class Add extends Component {
   constructor(props) {
@@ -42,4 +52,4 @@ class Add extends Component {
   }
 }
 
-export default Add;
+export default connect(mapStateToProps, mapDispatchToProps)(Add);

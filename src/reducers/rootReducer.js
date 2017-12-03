@@ -7,7 +7,7 @@ import { PostsReducer } from "./postsReducer";
 // import ErrorReducer from "./error_reducer";
 
 const RootReducer = combineReducers({
-  posts: PostsReducer,
+  postsBySubs: PostsReducer,
 //   comments: CommentReducer,
 //   profile: ProfileReducer,
 //   errors: ErrorReducer,

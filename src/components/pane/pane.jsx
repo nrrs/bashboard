@@ -3,35 +3,36 @@ import React, {Component} from "react";
 class Pane extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      subName: this.props.subreddit
-    };
   }
 
   componentDidMount() {
     this
       .props
-      .requestPosts(this.state.subName);
+      .requestPosts(this.props.sub);
   }
 
-  render() {
-    const posts = this.props.posts;
-    const postsIDs = Object.keys(posts);
+  renderPosts() {
+    const {sub, postsBySubs } = this.props;
+    const posts = !postsBySubs[sub] ? [] : Object.keys(postsBySubs[sub]);
 
-
-    return <div className="Pane">
-        <h1>{this.state.subName}</h1>
-        <ul>
-          {postsIDs.map(id => {
+    return (
+      <ul>
+          {posts.map(id => {
             return (
               <li key={id}>
-                <strong>Title: </strong>{posts[id].data.title}<br/>
-                <strong>Score: </strong>{posts[id].data.score}
+                <strong>Title: </strong>{postsBySubs[sub][id].title}<br/>
+                <strong>Author: </strong>{postsBySubs[sub][id].author}
               </li>
             );
           })}
         </ul>
+    );
+  }
+
+  render() {
+    return <div className="Pane">
+        <h1>{this.props.sub}</h1>
+        {this.renderPosts()}
       </div>;
   }
 }

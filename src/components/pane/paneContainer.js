@@ -9,10 +9,8 @@ import { requestPosts } from "../../reducers/postsReducer";
 
 // import { selectAllObjects } from "../../reducers/selectors";
 
-const mapStateToProps = ({ posts }, ownProps) => {
-  return {
-    posts
-  };
+const mapStateToProps = ({ postsBySubs }, ownProps) => {
+  return { postsBySubs };
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -17,7 +17,7 @@ class Dashboard extends Component {
   }
 
   renderPanes() {
-    return this.state.subreddits.map((sub, i) => <PaneContainer subreddit={sub} key={i} />);
+    return this.state.subreddits.map((sub, i) => <PaneContainer sub={sub} key={i} />);
   }
 
   addPane(sub) {

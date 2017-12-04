@@ -1,14 +1,28 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
+import { fetchPosts } from "../../reducers/postsReducer";
+
+const mapStateToProps = ({ postsBySubs }, ownProps) => {
+  return { postsBySubs };
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchPosts: sub => dispatch(fetchPosts(sub)),
+});
+
 
 class Pane extends Component {
   constructor(props) {
     super(props);
+    this.state = { chartType: '' };
   }
 
   componentDidMount() {
+    console.log(this.props);
+    console.log('this.props.sub inside pane', this.props.sub);
     this
       .props
-      .requestPosts(this.props.sub);
+      .fetchPosts(this.props.sub);
   }
 
   renderPosts() {
@@ -37,4 +51,4 @@ class Pane extends Component {
   }
 }
 
-export default Pane;
+export default connect(mapStateToProps, mapDispatchToProps)(Pane);

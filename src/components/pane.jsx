@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {fetchPosts} from "../../reducers/postsReducer";
+import {fetchPosts} from "../reducers/postsReducer";
+import BarChart from "./charts/barChart";
 
 const mapStateToProps = (state, ownProps) => ({postsBySubs: state.postsBySubs});
 
@@ -9,13 +10,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Pane extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chartType: ''
-    };
-  }
-
   componentDidMount() {
     this
       .props
@@ -46,6 +40,7 @@ class Pane extends Component {
   render() {
     return <div className="Pane">
       <h2>{this.props.sub}</h2>
+      <BarChart sub={this.props.sub} />
       {this.renderPosts()}
     </div>;
   }

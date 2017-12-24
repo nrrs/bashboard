@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import Add from "../add/add";
-import Pane from "../pane/pane";
+import Add from "./add";
+import Pane from "./pane";
 
 const mapStateToProps = (state, ownProps) => ({subscriptions: state.subreddits.subscriptions});
 

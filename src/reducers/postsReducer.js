@@ -29,15 +29,16 @@ export const PostsReducer = (state = defaultState(), action) => {
                 .children
                 .forEach(child => {
                     let post = {
-                        title: child.data.title,
                         author: child.data.author,
-                        thumbnail: child.data.thumbnail,
-                        nsfw: child.data.over_18,
-                        score: child.data.score,
-                        ups: child.data.ups,
+                        created_utc: child.data.created_utc,
                         downs: child.data.downs,
                         isVideo: child.data.is_video,
+                        nsfw: child.data.over_18,
                         numComments: child.data.num_comments,
+                        score: child.data.score,
+                        thumbnail: child.data.thumbnail,
+                        title: child.data.title,
+                        ups: child.data.ups,
                         url: child.data.url
                     };
                     copyState[action.sub][child.data.name] = post;

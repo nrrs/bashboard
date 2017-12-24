@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from "react-redux";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 
-import Dashboard from './components/dashboard/dashboard';
+import Dashboard from './components/dashboard';
 import About from './pages/about';
 
 const App = ({ store }) => (

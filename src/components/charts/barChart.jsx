@@ -23,7 +23,7 @@ class BarChart extends Component {
   }
 
   componentDidMount() {
-    this.createBarChart();
+    // this.createBarChart();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,7 +48,7 @@ class BarChart extends Component {
     const margin = 50;
     const width = 700;
     const height = 500;
-    const barWidth = 25;
+    const barWidth = 5;
 
     svg
       .attr("width", width + margin * 2)
@@ -88,7 +88,7 @@ class BarChart extends Component {
       .attr("y", d => height + margin / 3)
       .attr("dy", ".75em")
       .text(function(data) {
-        return data.author;
+        return data.score;
       }); 
   }
 

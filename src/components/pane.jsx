@@ -40,7 +40,27 @@ class Pane extends Component {
   render() {
     return <div className="Pane">
       <h2>{this.props.sub}</h2>
-      <BarChart sub={this.props.sub} />
+      <BarChart sub={this.props.sub} data={[{
+        'x': 10,
+        'y': 100,
+        'label': 'norris'
+    }, {
+        'x': 20,
+        'y': 200,
+        'label': 'bailey'
+    }, {
+        'x': 30,
+        'y': 150,
+        'label': 'goody'
+    }, {
+        'x': 40,
+        'y': 210,
+        'label': 'bobo'
+    }, {
+        'x': 50,
+        'y': 410,
+        'label': 'jane'
+    }]} size={[500,500]} />
       {this.renderPosts()}
     </div>;
   }

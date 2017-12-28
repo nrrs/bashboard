@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 
 
 const mapStateToProps = (state, ownProps) => ({
-  // data: state.postsBySubs[ownProps.sub]
+  data: state.postsBySubs[ownProps.sub]
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -16,6 +16,7 @@ class BarChart extends Component {
     super(props);
 
     this.state = {
+      data: [],
       postTitles: [],
       postDates: []
     };
@@ -26,10 +27,12 @@ class BarChart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let data = Object.keys(nextProps.data).map(title => nextProps.data[title]);
     let postTitles = Object.keys(nextProps.data);
     let postDates = Object.keys(nextProps.data).map(title => nextProps.data[title].created_utc);
 
     this.setState({ 
+      data,
       postTitles,
       postDates
     });
@@ -54,17 +57,17 @@ class BarChart extends Component {
 
     const xAxis = d3
       .scaleLinear()
-      .domain(d3.extent(this.props.data, (d, i) => i))
+      .domain(d3.extent(this.state.data, (d, i) => i))
       .range([0, width - barWidth - margin]);
 
     const yAxis = d3
       .scaleLinear()
-      .domain([0, d3.max(this.props.data, d => d.y)])
+      .domain([0, d3.max(this.state.data, d => d.score)])
       .range([height, 0]);
 
     const bar = svg
       .selectAll("g")
-      .data(this.props.data)
+      .data(this.state.data)
       .enter()
       .append("g")
       .attr("transform", `translate(${margin}, ${margin})`);
@@ -73,9 +76,9 @@ class BarChart extends Component {
       .append("rect")
       .attr("class", "bar")
       .attr("width", barWidth)
-      .attr("height", d => height - yAxis(d.y))
+      .attr("height", d => height - yAxis(d.score))
       .attr("x", (d, i) => xAxis(i))
-      .attr("y", d => yAxis(d.y))
+      .attr("y", d => yAxis(d.score))
       .attr("fill", "red");
 
     bar
@@ -85,7 +88,7 @@ class BarChart extends Component {
       .attr("y", d => height + margin / 3)
       .attr("dy", ".75em")
       .text(function(data) {
-        return data.label;
+        return data.author;
       }); 
   }
 

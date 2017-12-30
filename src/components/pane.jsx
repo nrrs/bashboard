@@ -50,10 +50,12 @@ class Pane extends Component {
   }
 
   render() {
+    const { sub, postsBySubs } = this.props;
     return <div className="Pane">
       <h2>{this.props.sub}</h2>
-      <BarChart sub={this.props.sub} />
-      {this.renderPosts()}
+      <BarChart sub={sub} data={postsBySubs[sub]} barChartType='horizontal' />
+      <BarChart sub={sub} data={postsBySubs[sub]} barChartType='vertical' />
+      {/* {this.renderPosts()} */}
     </div>;
   }
 }

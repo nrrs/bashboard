@@ -31,9 +31,15 @@ class Pane extends Component {
     return (
       <ul className="posts">
         {posts.map(id => {
+          const altText = !postsBySubs[sub][id].thumbnail ? '' : postsBySubs[sub][id].title;
           return <li key={id}>
+              <img src={postsBySubs[sub][id].thumbnail} alt={altText}/>
               <strong>Title:</strong>
-              <span>{postsBySubs[sub][id].title}</span>
+              <span>
+                <a href={postsBySubs[sub][id].url}>
+                  {postsBySubs[sub][id].title}
+                </a>
+              </span>
               <br />
               <strong>Author:</strong>
               <span>{postsBySubs[sub][id].author}</span>

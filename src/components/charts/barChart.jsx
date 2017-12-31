@@ -12,19 +12,17 @@ const mapDispatchToProps = dispatch => ({
 //   fetchPosts: sub => dispatch(fetchPosts(sub))
 });
 
+const HOR_BAR = {
+  margin: 25,
+  width: 500,
+  height: 300
+};
 const VERT_BAR = {
   margin: 50,
-  width: 400,
-  height: 500,
-  stroke: 10
+  width: 500,
+  height: 300
 };
 
-const HOR_BAR = {
-  margin: 50,
-  width: 700,
-  height: 500,
-  stroke: 10
-};
 
 class BarChart extends Component {
   constructor(props) {
@@ -47,7 +45,7 @@ class BarChart extends Component {
 
   createBarChart() {
     const { barChartType } = this.state;
-    const { margin, width, height, stroke } = barChartType === "horizontal" 
+    const { margin, width, height } = barChartType === "horizontal" 
       ? HOR_BAR 
       : VERT_BAR;
     const svg = d3.select(this.node);
@@ -63,23 +61,53 @@ class BarChart extends Component {
       .selectAll("g")
       .data(this.state.data)
       .enter()
-      .append("g")
-      .attr("transform", `translate(${margin}, ${margin})`);
+      .append("g");
 
     if (barChartType === 'horizontal') {
       xAxis
         .domain(d3.extent(this.state.data, (d, i) => i))
-        .range([0, width - stroke - margin]);
+        .range([0, width - margin/2]);
       yAxis
         .domain([0, d3.max(this.state.data, d => d.score)])
         .range([height, 0]);
-    } else {
+      bar
+        .attr("transform", `translate(${margin}, ${margin})`)
+        .append("rect")
+        .attr("class", "bar")
+        .attr("width", (width - (margin * 6)) / this.state.data.length)
+        .attr("height", d => height - yAxis(d.score))
+        .attr("x", (d, i) => xAxis(i))
+        .attr("y", d => yAxis(d.score))
+        .attr("fill", "#ccc");
+      bar
+        .append("text")
+        .attr("class", "label")
+        .attr("x", (d, i) => xAxis(i))
+        .attr("y", d => height + margin / 3)
+        .attr("dy", ".5em")
+        .text((d, i) => i + 1); 
+    } else { // VERTICAL BAR CHART
       xAxis
         .domain([0, d3.max(this.state.data, d => d.score)])
-        .range([height, 0]);
+        .range([0, width]);
       yAxis
         .domain(d3.extent(this.state.data, (d, i) => i))
-        .range([0, width - stroke - margin]);
+        .range([0, height]);
+      bar
+        .attr("transform", `translate(${margin}, 0)`)
+        .append("rect")
+        .attr("class", "bar")
+        .attr("width", d => xAxis(d.score))
+        .attr("height", height / this.state.data.length)
+        .attr("y", (d, i) => yAxis(i))
+        .attr("fill", "#ccc");
+      bar
+        .append("text")
+        .attr("class", "label")
+        .attr("x", d => width + margin / 3)
+        .attr("y", (d, i) => yAxis(i))
+        .attr("dy", ".5em")
+        .text((d, i) => i + 1);
     }
 
     // const xAxis = d3
@@ -98,29 +126,20 @@ class BarChart extends Component {
     //   .enter()
     //   .append("g")
     //   .attr("transform", `translate(${margin}, ${margin})`);
-
-    bar
-      .append("rect")
-      .attr("class", "bar")
-      .attr("width", stroke)
-      .attr("height", d => height - yAxis(d.score))
-      .attr("x", (d, i) => xAxis(i))
-      .attr("y", d => yAxis(d.score))
-      .attr("fill", "#ccc");
-
-    bar
-      .append("text")
-      .attr("class", "label")
-      .attr("x", (d, i) => xAxis(i) - 3)
-      .attr("y", d => height + margin / 3)
-      .attr("dy", ".75em")
-      .text(function(data) {
-        return data.score;
-      }); 
+// bar
+//   .append("text")
+//   .attr("class", "label")
+//   .attr("x", (d, i) => xAxis(i) - 3)
+//   .attr("y", d => height + margin / 3)
+//   .attr("dy", ".75em")
+//   .text(function(data) {
+//     return data.score;
+//   }); 
+    
   }
 
   render() {
-    return <svg ref={node => this.node = node} ></svg>
+    return <svg ref={node => this.node = node} className="chart"></svg>
   }
 }
 

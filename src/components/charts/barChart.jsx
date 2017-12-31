@@ -12,17 +12,21 @@ const mapDispatchToProps = dispatch => ({
 //   fetchPosts: sub => dispatch(fetchPosts(sub))
 });
 
-const HOR_BAR = {
+// const HOR_BAR = {
+//   margin: 25,
+//   width: 500,
+//   height: 300
+// };
+// const VERT_BAR = {
+//   margin: 25,
+//   width: 500,
+//   height: 300
+// };
+const BAR_DIMENSIONS = {
   margin: 25,
-  width: 500,
-  height: 300
+  width: 600,
+  height: 600
 };
-const VERT_BAR = {
-  margin: 50,
-  width: 500,
-  height: 300
-};
-
 
 class BarChart extends Component {
   constructor(props) {
@@ -44,10 +48,8 @@ class BarChart extends Component {
   }
 
   createBarChart() {
-    const { barChartType } = this.state;
-    const { margin, width, height } = barChartType === "horizontal" 
-      ? HOR_BAR 
-      : VERT_BAR;
+    const { barChartType, data } = this.state;
+    const { margin, width, height } = BAR_DIMENSIONS;
     const svg = d3.select(this.node);
 
     svg
@@ -61,53 +63,51 @@ class BarChart extends Component {
       .selectAll("g")
       .data(this.state.data)
       .enter()
-      .append("g");
+      .append("g")
+      .attr("transform", `translate(${margin}, ${margin})`);
+    const text = bar
+      .append("text")
+      .attr("class", "label")
+      .attr("text-anchor", "middle")
+      .text((d, i) => i + 1); 
 
     if (barChartType === 'horizontal') {
       xAxis
-        .domain(d3.extent(this.state.data, (d, i) => i))
-        .range([0, width - margin/2]);
+        .domain(d3.extent(data, (d, i) => i))
+        .range([0, width - margin/3]);
       yAxis
-        .domain([0, d3.max(this.state.data, d => d.score)])
+        .domain([0, d3.max(data, d => d.score)])
         .range([height, 0]);
       bar
-        .attr("transform", `translate(${margin}, ${margin})`)
         .append("rect")
         .attr("class", "bar")
-        .attr("width", (width - (margin * 6)) / this.state.data.length)
+        .attr("width", (width - (margin * 6)) / data.length)
         .attr("height", d => height - yAxis(d.score))
         .attr("x", (d, i) => xAxis(i))
         .attr("y", d => yAxis(d.score))
         .attr("fill", "#ccc");
-      bar
-        .append("text")
-        .attr("class", "label")
-        .attr("x", (d, i) => xAxis(i))
-        .attr("y", d => height + margin / 3)
-        .attr("dy", ".5em")
-        .text((d, i) => i + 1); 
+      text
+        .attr("x", (d, i) => xAxis(i) + margin/3)
+        .attr("y", d => height)
+        .attr("dy", (width - (margin * 6)) / data.length);
     } else { // VERTICAL BAR CHART
       xAxis
-        .domain([0, d3.max(this.state.data, d => d.score)])
+        .domain([0, d3.max(data, d => d.score)])
         .range([0, width]);
       yAxis
-        .domain(d3.extent(this.state.data, (d, i) => i))
-        .range([0, height]);
+        .domain(d3.extent(data, (d, i) => i))
+        .range([0, (height - margin/3)]);
       bar
-        .attr("transform", `translate(${margin}, 0)`)
         .append("rect")
         .attr("class", "bar")
         .attr("width", d => xAxis(d.score))
-        .attr("height", height / this.state.data.length)
+        .attr("height", (height - (margin * 6)) / data.length)
         .attr("y", (d, i) => yAxis(i))
         .attr("fill", "#ccc");
-      bar
-        .append("text")
-        .attr("class", "label")
-        .attr("x", d => width + margin / 3)
+      text
         .attr("y", (d, i) => yAxis(i))
-        .attr("dy", ".5em")
-        .text((d, i) => i + 1);
+        .attr("x", -15)
+        .attr("dy", (height - (margin * 6)) / data.length);
     }
 
     // const xAxis = d3

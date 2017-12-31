@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import Add from "./add";
+import Header from "./header";
 import Pane from "./pane";
 
 const mapStateToProps = (state, ownProps) => ({subscriptions: state.subreddits.subscriptions});
@@ -33,7 +33,9 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <Add/> {this.renderPanes()}
+        <Header />
+        {this.renderPanes()}
+
       </div>
     );
   }

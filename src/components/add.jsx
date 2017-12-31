@@ -64,7 +64,7 @@ class Add extends Component {
 
   render() {
     return (
-      <div className="Add" style={addStyles}>
+      <div className="add" style={addStyles}>
         <h1
           style={{
             margin: "0px"

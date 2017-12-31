@@ -21,3 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 
 bundle.js*
+
+main.css.map
+.sass-cache/

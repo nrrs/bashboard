@@ -7,15 +7,32 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class ChartSelector extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedChart: 'hor-bar',
+    };
+    this.handleOptionChange = this.handleOptionChange.bind(this);
+  }
+
+  handleOptionChange(e) {
+    this.setState({selectedChart: e.target.value});
+  }
 
   render() {
-    return <ul className="chart-selector">
-        <li>Horizontal Bar Chart</li>
-        <li>Vertical Bar Chart</li>
-        <li>Line Chart</li>
-        <li>Pie Chart</li>
-        <li>Ring Chart</li>
-    </ul>;
+    return <div className="chart-selector">
+        <form>
+          <label>
+            <input type="radio" value="hor-bar" onChange={this.handleOptionChange} checked={this.state.selectedChart === "hor-bar"} />Horizontal Bar
+          </label>
+          <label>
+            <input type="radio" value="vert-bar" onChange={this.handleOptionChange} checked={this.state.selectedChart === "vert-bar"} />Vertical Bar
+          </label>
+          <label>
+            <input type="radio" value="pie-chart" onChange={this.handleOptionChange} checked={this.state.selectedChart === "pie-chart"} />Pie Chart
+          </label>
+        </form>
+      </div>;
   }
 }
 

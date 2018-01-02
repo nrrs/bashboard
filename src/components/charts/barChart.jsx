@@ -27,7 +27,6 @@ const BAR_DIMENSIONS = {
 class BarChart extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       barChartType: this.props.barChartType,
       data: []
@@ -106,32 +105,6 @@ class BarChart extends Component {
         .attr("x", -16)
         .attr("text-anchor", "middle");
     }
-
-    // const xAxis = d3
-    //   .scaleLinear()
-    //   .domain(d3.extent(this.state.data, (d, i) => i))
-    //   .range([0, width - stroke - margin]);
-
-    // const yAxis = d3
-    //   .scaleLinear()
-    //   .domain([0, d3.max(this.state.data, d => d.score)])
-    //   .range([height, 0]);
-
-    // const bar = svg
-    //   .selectAll("g")
-    //   .data(this.state.data)
-    //   .enter()
-    //   .append("g")
-    //   .attr("transform", `translate(${margin}, ${margin})`);
-// bar
-//   .append("text")
-//   .attr("class", "label")
-//   .attr("x", (d, i) => xAxis(i) - 3)
-//   .attr("y", d => height + margin / 3)
-//   .attr("dy", ".75em")
-//   .text(function(data) {
-//     return data.score;
-//   }); 
     
   }
 

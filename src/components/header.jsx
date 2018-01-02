@@ -1,10 +1,9 @@
 import React from 'react';
 import Add from './add';
-import ChartSelector from './chartSelector';
 
 const Header = () => (<div className="header">
+    <div id="hamburger">|||</div>
     <Add/>
-    <ChartSelector/>
 </div>);
 
 export default Header;

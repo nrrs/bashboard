@@ -24,14 +24,7 @@ export const SubsReducer = (state = defaultState(), action) => {
 
   switch (action.type) {
     case RECEIVE_SUBS:
-      // console.log("copyState.subscriptions", copyState.subscriptions);
-      // console.log("action.subscriptions", action.subscriptions);
-      // var set = new Set(copyState.subscriptions);
-      // action.subscriptions.forEach(sub => set.add(sub));
-
       copyState.subscriptions = action.subscriptions;
-      // copyState.subscriptions = Array.from(set);
-      // copyState.subscriptions.add(action.subscriptions)
       return copyState;
 
     case RECEIVE_RESULTS:

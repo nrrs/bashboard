@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {fetchPosts} from "../reducers/postsReducer";
 import BarChart from "./charts/barChart";
+import ChartSelector from './chartSelector';
 
 const mapStateToProps = (state, ownProps) => ({postsBySubs: state.postsBySubs});
 
@@ -18,10 +19,12 @@ class Pane extends Component {
 
   render() {
     const { sub, postsBySubs } = this.props;
-    return <div className="Pane">
+    return <div className="pane">
+      <header>
         <h2>{this.props.sub}</h2>
+        <ChartSelector />
+      </header>
         <BarChart sub={sub} data={postsBySubs[sub]} barChartType="horizontal" />
-        <BarChart sub={sub} data={postsBySubs[sub]} barChartType="vertical" />
         {/* {this.renderPosts()} */}
       </div>;
   }

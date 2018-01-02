@@ -34,7 +34,9 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <Header />
-        {this.renderPanes()}
+        <div className="main">
+          {this.renderPanes()}
+        </div>
 
       </div>
     );

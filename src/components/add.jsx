@@ -63,13 +63,10 @@ class Add extends Component {
   }
 
   render() {
+    const show = this.state.results.length > 0 ? { display: "flex" } : {};
     return (
-      <div className="add" style={addStyles}>
-        <h1
-          style={{
-            margin: "0px"
-          }}
-        >
+      <div className="add">
+        <div className="search">
           r/
           <input
             id="query"
@@ -80,34 +77,24 @@ class Add extends Component {
           <button id="add" onClick={() => this.handleSubmit(this.state.query)}>
             ADD
           </button>
-        </h1>
-        <ul className="results" style={resultStyles}>
-          {this.state.results.map(result => {
-            return (
-              <li
-                key={result.id}
-                onClick={() => this.handleSubmit(result.name)}
-              >
-                {result.name}
-              </li>
-            );
-          })}
-        </ul>
+        </div>
+        <div className="results" style={show}>
+          <ul className="result-list">
+            {this.state.results.map(result => {
+              return (
+                <li
+                  key={result.id}
+                  onClick={() => this.handleSubmit(result.name)}
+                >
+                  {result.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     );
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Add);
-
-const addStyles = {
-  position: 'relative'
-};
-
-const resultStyles = {
-  position: "absolute",
-  top: '35px',
-  margin: '0px',
-  cursor: 'pointer',
-  background: '#fafafa'
-};

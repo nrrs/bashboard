@@ -1,4 +1,7 @@
-body {
-  background: red; }
+.header {
+  position: absolute;
+  top: 0p;
+  display: flex;
+  justify-content: space-between; }
 
 /*# sourceMappingURL=main.css.map */

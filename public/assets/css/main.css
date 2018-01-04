@@ -7,6 +7,11 @@ body {
   display: flex;
   flex-direction: column; }
 
+.chart,
+.legend,
+.details {
+  border: 1px solid #e6e6e6; }
+
 body {
   background: #fafafa;
   padding: 15px;
@@ -61,6 +66,18 @@ body {
     margin-bottom: 15px; }
     .pane header > * {
       margin: 0px; }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 15px 0px; }
+
+.gutter-right {
+  margin-right: 15px; }
+
+.legend {
+  width: 100%; }
 
 #hamburger {
   position: absolute;

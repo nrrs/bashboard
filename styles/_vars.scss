@@ -8,3 +8,8 @@ $border:    #e6e6e6;
 
 // Misc
 $resultFix: 3px;
+
+// Mixins - Extends
+%border {
+    border: 1px solid $border;
+}

@@ -50,8 +50,7 @@ class BarChart extends Component {
     const svg = d3.select(this.node);
     svg
       .attr("width", width + margin)
-      .attr("height", height + margin)
-      .attr("style", "border: 1px solid #e0e0e0");
+      .attr("height", height + margin);
 
     const xAxis = d3.scaleLinear();
     const yAxis = d3.scaleLinear();
@@ -109,7 +108,9 @@ class BarChart extends Component {
   }
 
   render() {
-    return <svg ref={node => this.node = node} className="chart"></svg>
+    return <div className="chart">
+        <svg ref={node => (this.node = node)} className="bar-chart" />
+      </div>;
   }
 }
 

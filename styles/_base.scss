@@ -56,6 +56,23 @@ body {
         }
     }
 }
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: $bu 0px;
+}
+.gutter-right {
+    margin-right: $bu;
+}
+.legend {
+    width: 100%;
+}
+.chart,
+.legend,
+.details {
+    @extend %border;
+}
 #hamburger {
     position: absolute;
     left: $bu;

@@ -28,8 +28,11 @@ class BarChart extends Component {
   }
 
   render() {
-    return <aside className="legend gutter-right">
-
+    return <aside className="legend">
+        <ul>
+            <li><strong>X:</strong> this</li>
+            <li><strong>Y:</strong> that</li>
+        </ul>
     </aside>;
   }
 }

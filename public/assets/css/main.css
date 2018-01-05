@@ -9,8 +9,15 @@ body {
 
 .chart,
 .legend,
-.details {
+.details,
+.posts {
   border: 1px solid #e6e6e6; }
+
+.chart,
+.legend,
+.details,
+.posts {
+  background: #fff; }
 
 body {
   background: #fafafa;
@@ -71,13 +78,28 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 15px 0px; }
+  margin: 15px 0px;
+  max-height: 353px; }
+  .row > * {
+    margin-right: 15px; }
+  .row > *:last-child {
+    margin-right: 0px; }
 
 .gutter-right {
   margin-right: 15px; }
 
 .legend {
-  width: 100%; }
+  width: 100%;
+  max-width: 250px;
+  min-width: 150px;
+  flex: 1; }
+
+.chart {
+  flex: 2; }
+
+.posts {
+  flex: 1;
+  overflow-y: scroll; }
 
 #hamburger {
   position: absolute;

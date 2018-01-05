@@ -2,14 +2,16 @@ import {requestPosts} from '../util/api.util';
 
 // ACTIONS
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
+export const RECEIVE_CHART_TYPE = "RECEIVE_CHART_TYPE";
 
 export const receivePosts = (posts, sub) => ({type: RECEIVE_POSTS, posts, sub});
-
 export const fetchPosts = (sub) => dispatch => {
     return requestPosts(sub).then(res => {
         dispatch(receivePosts(res.data, sub));
     });
 };
+
+export const receiveChartType = (sub, chart) => ({type: RECEIVE_CHART_TYPE, sub, chart});
 
 // REDUCER
 const defaultState = () => ({});
@@ -43,8 +45,15 @@ export const PostsReducer = (state = defaultState(), action) => {
                     };
                     copyState[action.sub][child.data.name] = post;
                 });
-
+            
+            copyState[`${action.sub}_chart_type`] = 'hor-bar';
+                
             return copyState;
+
+        case RECEIVE_CHART_TYPE:
+            copyState[`${action.sub}_chart_type`] = action.chart;
+            return copyState;
+                
         default:
             return copyState;
     }

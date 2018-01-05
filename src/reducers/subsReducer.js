@@ -16,7 +16,7 @@ export const CLEAR_RESULTS = "CLEAR_RESULTS";
 export const clearResults = () => ({type: CLEAR_RESULTS});
 
 // REDUCER
-const defaultState = () => ({subscriptions: [], searchResults: []});
+const defaultState = () => ({subscriptions: ['aww'], searchResults: []});
 
 export const SubsReducer = (state = defaultState(), action) => {
   Object.freeze(state);

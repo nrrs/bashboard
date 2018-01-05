@@ -4,8 +4,7 @@ import * as d3 from 'd3';
 
 
 const mapStateToProps = (state, ownProps) => ({
-  data: state.postsBySubs[ownProps.sub],
-  barChartType: ownProps.barChartType,
+  data: state.postsBySubs[ownProps.sub]
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -13,12 +12,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const HOR_BAR = {
-  width: 700,
-  height: 500
+  width: 500,
+  height: 300
 };
 const VERT_BAR = {
-  width: 500,
-  height: 500
+  width: 300,
+  height: 300
 };
 const BAR_DIMENSIONS = {
   margin: 50,
@@ -28,14 +27,17 @@ class BarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      barChartType: this.props.barChartType,
       data: []
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) { 
     let data = Object.keys(nextProps.data).map(title => nextProps.data[title]);
     this.setState({ data });
+    this.createBarChart();
+  }
+  componentDidMount() {
+    this.createBarChart();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -43,15 +45,13 @@ class BarChart extends Component {
   }
 
   createBarChart() {
-    const { barChartType, data } = this.state;
+    const { data } = this.state;
+    const { barChartType } = this.props;
     const { margin } = BAR_DIMENSIONS;
-    const { width, height } = barChartType === 'horizontal' ? HOR_BAR : VERT_BAR;
-
-    const svg = d3.select(this.node);
-    svg
+    const { width, height } = barChartType === 'hor-bar' ? HOR_BAR : VERT_BAR;
+    const svg = d3.select(this.node)
       .attr("width", width + margin)
       .attr("height", height + margin);
-
     const xAxis = d3.scaleLinear();
     const yAxis = d3.scaleLinear();
     const bar = svg
@@ -64,9 +64,8 @@ class BarChart extends Component {
       .append("text")
       .attr("class", "label")
       .text((d, i) => i + 1); 
-    
 
-    if (barChartType === 'horizontal') {
+    if (barChartType === 'hor-bar') {
       xAxis
         .domain(d3.extent(data, (d, i) => i))
         .range([0, width - margin/2]);
@@ -107,9 +106,14 @@ class BarChart extends Component {
     
   }
 
+  componentWillUnmount() {
+    console.log('unmount');
+  }
+
   render() {
+    const { barChartType } = this.props;
     return <div className="chart">
-        <svg ref={node => (this.node = node)} className="bar-chart" />
+        <svg ref={node => (this.node = node)} className={`bar-chart ${barChartType}`} />
       </div>;
   }
 }

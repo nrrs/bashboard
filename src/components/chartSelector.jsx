@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { receiveChartType } from "../reducers/postsReducer";
 
-const mapStateToProps = (state, ownProps) => ({  });
+
+const mapStateToProps = (state, ownProps) => ({
+  sub: ownProps.sub,
+});
 
 const mapDispatchToProps = dispatch => ({
+  updateChartType: (sub, chart) => dispatch(receiveChartType(sub, chart))
 });
 
 class ChartSelector extends Component {
@@ -16,7 +21,9 @@ class ChartSelector extends Component {
   }
 
   handleOptionChange(e) {
+    const {sub} = this.props;
     this.setState({selectedChart: e.target.value});
+    this.props.updateChartType(sub, e.target.value);
   }
 
   render() {

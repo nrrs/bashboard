@@ -61,17 +61,36 @@ body {
     flex-direction: row;
     justify-content: space-between;
     margin: $bu 0px;
+    max-height: 350px + 3;
+    & > * {
+        margin-right: $bu;
+    }
+    & > *:last-child {
+        margin-right: 0px;
+    }
 }
 .gutter-right {
     margin-right: $bu;
 }
 .legend {
     width: 100%;
+    max-width: 250px;
+    min-width: 150px;
+    flex: 1;
+}
+.chart {
+    flex: 2;
+}
+.posts {
+    flex: 1;
+    overflow-y: scroll;
 }
 .chart,
 .legend,
-.details {
+.details,
+.posts {
     @extend %border;
+    @extend %white-bg;
 }
 #hamburger {
     position: absolute;
